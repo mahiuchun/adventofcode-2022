@@ -1,0 +1,15 @@
+(deffunction main ()
+  (open "input.txt" myinput)
+  (bind ?snacks (create$))
+  (bind ?elf 0)
+  (while (neq (bind ?line (readline myinput)) EOF)
+    do
+    (if (eq ?line "")
+      then (progn
+             (bind ?snacks (insert$ ?snacks 1 ?elf))
+             (bind ?elf 0))
+      else (bind ?elf (+ ?elf (string-to-field ?line)))))
+  (bind ?snacks (insert$ ?snacks 1 ?elf))
+  (bind ?snacks (sort < ?snacks))
+  (printout t (+ (nth$ 1 ?snacks) (nth$ 2 ?snacks) (nth$ 3 ?snacks)) crlf)
+  (close myinput))
